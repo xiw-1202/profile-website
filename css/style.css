@@ -59,7 +59,8 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 80px 0 90px; /* Increased bottom padding to account for footer */
+    padding: 80px 0 60px; /* Adjusted bottom padding */
+    padding-bottom: calc(60px + 50px); /* Additional padding for footer height */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -804,13 +805,13 @@ footer {
     left: 0;
     width: 100%;
     z-index: 999;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
+    /* Always visible, no transformation or hiding */
+    transform: translateY(0);
+    transition: background-color 0.3s ease;
 }
 
-section:last-child:hover ~ footer,
 footer:hover {
-    transform: translateY(0);
+    background-color: var(--secondary-color);
 }
 
 footer .container {
@@ -827,11 +828,20 @@ footer .container {
 .social-links a {
     color: white;
     font-size: 1.2rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .social-links a:hover {
-    color: var(--primary-color);
+    color: white;
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
 }
 
 /* Responsive Styles */

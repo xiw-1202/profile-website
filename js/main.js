@@ -54,15 +54,7 @@ function updateHeaderState() {
         
         lastScrollPosition = currentSection.scrollTop;
         
-        // Show footer when at bottom of sections
-        const footer = document.querySelector('footer');
-        const isNearBottom = currentSection.scrollTop + currentSection.clientHeight >= currentSection.scrollHeight - 100;
-        
-        if (isNearBottom && footer) {
-            footer.style.transform = 'translateY(0)';
-        } else if (footer) {
-            footer.style.transform = 'translateY(100%)';
-        }
+        // Footer is now always visible, no need to control visibility
     }
 }
 
