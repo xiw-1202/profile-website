@@ -35,6 +35,70 @@
     visibility: hidden;
 }
 
+/* Fullpage Scrolling */
+html, body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+}
+
+main {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+section {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 80px 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+}
+
+/* Navigation dots for fullpage scrolling */
+.section-navigation {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+}
+
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--gray-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.3);
+}
+
+.nav-dot:hover {
+    background-color: var(--primary-color);
+}
+
 /* Section Reveal Animation */
 .js-loading {
     overflow-y: scroll;
@@ -43,13 +107,18 @@
 .section--hidden {
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease;
     will-change: opacity, transform;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .section--visible {
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    pointer-events: auto;
+    z-index: 10;
 }
 
 /* Element animations within sections */
@@ -191,6 +260,11 @@ header {
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+header.hidden {
+    transform: translateY(-100%);
 }
 
 .navbar {
@@ -246,9 +320,14 @@ header {
 
 /* Hero Section */
 .hero {
-    padding-top: 150px;
-    padding-bottom: 100px;
+    padding: 0;
+    display: flex;
+    align-items: center;
     background-color: #fff;
+}
+
+.hero .container {
+    padding-top: 80px; /* Account for header */
 }
 
 .hero-content {
@@ -310,8 +389,13 @@ header {
 
 /* About Section */
 .about {
-    padding: var(--section-padding);
     background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.about .container {
+    padding-top: 80px;
 }
 
 .about-content {
@@ -331,8 +415,13 @@ header {
 
 /* Experience Section */
 .experience {
-    padding: var(--section-padding);
     background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+}
+
+.experience .container {
+    padding-top: 80px;
 }
 
 .timeline {
@@ -418,8 +507,13 @@ header {
 
 /* Skills Section */
 .skills {
-    padding: var(--section-padding);
     background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.skills .container {
+    padding-top: 80px;
 }
 
 .skills-container {
@@ -472,8 +566,13 @@ header {
 
 /* Education Section */
 .education {
-    padding: var(--section-padding);
     background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+}
+
+.education .container {
+    padding-top: 80px;
 }
 
 .education-container {
@@ -516,8 +615,13 @@ header {
 
 /* Contact Section */
 .contact {
-    padding: var(--section-padding);
     background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.contact .container {
+    padding-top: 80px;
 }
 
 .contact-content {
@@ -579,9 +683,14 @@ header {
 
 /* Footer */
 footer {
-    padding: 30px 0;
+    padding: 20px 0;
     background-color: var(--dark-color);
     color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 footer .container {
@@ -630,6 +739,15 @@ footer .container {
 
     .cta-buttons {
         justify-content: center;
+    }
+    
+    .section-navigation {
+        right: 15px;
+    }
+    
+    .nav-dot {
+        width: 10px;
+        height: 10px;
     }
 }
 
