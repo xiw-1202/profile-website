@@ -59,14 +59,36 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 80px 0;
+    padding: 80px 0 60px; /* Adjusted padding */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     backface-visibility: hidden;
     transform: translateZ(0);
     will-change: transform, opacity;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
+    /* Custom scrollbar styles */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Auto-hide scrollbars but keep functionality */
+section::-webkit-scrollbar {
+    width: 8px;
+}
+
+section::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+section::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+section:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Navigation dots for fullpage scrolling */
@@ -234,9 +256,9 @@ ul {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     position: relative;
 }
 
@@ -260,7 +282,13 @@ header {
     background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+header.compact {
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.98);
 }
 
 header.hidden {
@@ -271,7 +299,7 @@ header.hidden {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 10px 0; /* Reduced padding */
 }
 
 .logo {
@@ -395,7 +423,8 @@ header.hidden {
 }
 
 .about .container {
-    padding-top: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .about-content {
@@ -421,7 +450,8 @@ header.hidden {
 }
 
 .experience .container {
-    padding-top: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .timeline {
@@ -433,16 +463,16 @@ header.hidden {
 .timeline::before {
     content: '';
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 30px;
     width: 4px;
     height: 100%;
     background-color: var(--primary-color);
 }
 
 .timeline-item {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     position: relative;
+    padding-left: 50px;
 }
 
 .timeline-content {
@@ -456,13 +486,13 @@ header.hidden {
 .timeline-content::before {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background-color: white;
-    border: 4px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
     border-radius: 50%;
-    top: 30px;
-    left: -50px;
+    top: 24px;
+    left: -38px;
     z-index: 1;
 }
 
@@ -513,7 +543,8 @@ header.hidden {
 }
 
 .skills .container {
-    padding-top: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .skills-container {
@@ -572,7 +603,8 @@ header.hidden {
 }
 
 .education .container {
-    padding-top: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .education-container {
@@ -621,7 +653,8 @@ header.hidden {
 }
 
 .projects .container {
-    padding-top: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .projects-container {
@@ -686,7 +719,8 @@ header.hidden {
 }
 
 .contact .container {
-    padding-top: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .contact-content {
@@ -713,6 +747,18 @@ header.hidden {
 .contact-item i {
     font-size: 1.5rem;
     color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.contact-item a {
+    color: var(--primary-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.contact-item a:hover {
+    color: var(--secondary-color);
+    transform: translateX(3px);
 }
 
 .contact-form {
@@ -748,7 +794,7 @@ header.hidden {
 
 /* Footer */
 footer {
-    padding: 20px 0;
+    padding: 15px 0;
     background-color: var(--dark-color);
     color: white;
     position: fixed;
@@ -756,6 +802,13 @@ footer {
     left: 0;
     width: 100%;
     z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+section:last-child:hover ~ footer,
+footer:hover {
+    transform: translateY(0);
 }
 
 footer .container {

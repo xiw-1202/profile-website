@@ -44,14 +44,46 @@ navLinks.forEach(link => {
 
 // Header Scroll Effect
 const header = document.querySelector('header');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-        header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-        header.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+
+// Function to handle header state based on scroll position
+function updateHeaderState() {
+    // For each section's internal scroll
+    const currentSection = sections[currentSectionIndex];
+    if (currentSection) {
+        if (currentSection.scrollTop > 50) {
+            header.classList.add('compact');
+        } else {
+            header.classList.remove('compact');
+        }
+        
+        // Hide header when scrolling down quickly, show when scrolling up
+        // This is handled per section since each section has its own scrollbar
+        if (currentSection.scrollTop > 150 && currentSection.scrollTop > lastScrollPosition + 50) {
+            header.classList.add('hidden');
+        } else if (currentSection.scrollTop < lastScrollPosition - 20 || currentSection.scrollTop < 50) {
+            header.classList.remove('hidden');
+        }
+        
+        lastScrollPosition = currentSection.scrollTop;
+        
+        // Show footer when at bottom of sections
+        const footer = document.querySelector('footer');
+        const isNearBottom = currentSection.scrollTop + currentSection.clientHeight >= currentSection.scrollHeight - 100;
+        
+        if (isNearBottom) {
+            footer.style.transform = 'translateY(0)';
+        } else {
+            footer.style.transform = 'translateY(100%)';
+        }
     }
+}
+
+// Track scroll position
+let lastScrollPosition = 0;
+
+// Listen for scroll events on each section
+sections.forEach(section => {
+    section.addEventListener('scroll', updateHeaderState);
 });
 
 // Contact Form Submission
@@ -170,37 +202,60 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Show target section
         setTimeout(() => {
+            // Reset scroll position of all sections first
+            sections.forEach(section => {
+                section.scrollTop = 0;
+            });
+            
+            // Show the target section
             sections[index].classList.remove('section--hidden');
             sections[index].classList.add('section--visible');
-            sections[index].scrollIntoView({ behavior: 'smooth' });
+            
+            // Reset scroll position of the main container
+            document.querySelector('main').scrollTop = 0;
             
             // Animate elements within the section
             const elementsInSection = sections[index].querySelectorAll(elementSelectors);
             elementsInSection.forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                
                 setTimeout(() => {
                     el.style.opacity = '1';
                     el.style.transform = 'translateY(0)';
                 }, i * 100 + 300); // Staggered delay
             });
             
+            // Allow scrolling after animation completes
             setTimeout(() => {
                 isScrolling = false;
-            }, 1000);
+            }, 1200);
         }, 300);
     }
     
-    // Handle mouse wheel events
+    // Handle mouse wheel events with improved handling
     function handleWheel(e) {
-        e.preventDefault();
+        // Don't prevent default scrolling within sections
+        const currentSection = sections[currentSectionIndex];
         
-        if (isScrolling) return;
+        // Check if we're at the top or bottom of the current section
+        const isAtTop = currentSection.scrollTop <= 0;
+        const isAtBottom = currentSection.scrollTop + currentSection.clientHeight >= currentSection.scrollHeight - 10;
         
-        // Determine scroll direction
-        const direction = e.deltaY > 0 ? 1 : -1;
-        const targetIndex = currentSectionIndex + direction;
+        // Get scroll direction
+        const direction = e.deltaY > 0 ? 1 : -1; // 1 for down, -1 for up
         
-        if (targetIndex >= 0 && targetIndex < sectionCount) {
-            scrollToSection(targetIndex);
+        // Only change sections if we're at the edge and scrolling in the right direction
+        if ((direction > 0 && isAtBottom) || (direction < 0 && isAtTop)) {
+            // Only prevent default at section boundaries to enable section changes
+            e.preventDefault();
+            
+            if (isScrolling) return;
+            
+            const targetIndex = currentSectionIndex + direction;
+            if (targetIndex >= 0 && targetIndex < sectionCount) {
+                scrollToSection(targetIndex);
+            }
         }
     }
     
