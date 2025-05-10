@@ -76,25 +76,85 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Scroll Reveal Animation
-window.addEventListener('DOMContentLoaded', () => {
+// Preloader
+window.addEventListener('load', () => {
+    // Hide preloader when all content is loaded
+    const preloader = document.querySelector('.preloader');
+    if (preloader) {
+        preloader.classList.add('hidden');
+        
+        // Remove preloader from DOM after animation completes
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }
+    
+    // Remove loading class
+    document.body.classList.remove('js-loading');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     
-    const revealSection = function(entries, observer) {
-        const [entry] = entries;
-        
-        if (!entry.isIntersecting) return;
-        
-        entry.target.classList.add('section--visible');
-        observer.unobserve(entry.target);
-    };
-    
-    const sectionObserver = new IntersectionObserver(revealSection, {
-        root: null,
-        threshold: 0.15,
+    // Add the hidden class to all sections initially
+    sections.forEach(section => {
+        section.classList.add('section--hidden');
     });
     
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-        section.classList.add('section--hidden');
+    // This slight delay ensures the initial hiding happens before the page is fully loaded
+    // to prevent a flash of unstyled content
+    setTimeout(() => {
+        const revealSection = function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                
+                // When section becomes visible in the viewport
+                entry.target.classList.add('section--visible');
+                
+                // Once the animation is done, we can stop observing this section
+                observer.unobserve(entry.target);
+            });
+        };
+        
+        const sectionObserver = new IntersectionObserver(revealSection, {
+            root: null,
+            threshold: 0.15,  // When 15% of the section is visible
+            rootMargin: '-50px'  // A small negative margin makes sections reveal a bit later
+        });
+        
+        // Start observing each section
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    }, 100);
+    
+    // Optional: Add animation to individual elements within sections
+    const revealElements = document.querySelectorAll('.timeline-item, .skill-item, .education-item, .contact-item');
+    
+    const elementObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            
+            // Add a staggered delay based on the element's index
+            const delay = Array.from(revealElements).indexOf(entry.target) * 100;
+            
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, delay);
+            
+            observer.unobserve(entry.target);
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '-20px'
+    });
+    
+    // Style all elements initially
+    revealElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        elementObserver.observe(el);
     });
 });
