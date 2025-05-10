@@ -613,6 +613,71 @@ header.hidden {
     font-size: 1rem;
 }
 
+/* Projects Section */
+.projects {
+    background-color: var(--light-color);
+    display: flex;
+    align-items: center;
+}
+
+.projects .container {
+    padding-top: 80px;
+}
+
+.projects-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.project-item {
+    background-color: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-title {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-bottom: 5px;
+}
+
+.project-info {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.project-period {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    margin-bottom: 15px;
+}
+
+.project-description ul {
+    padding-left: 20px;
+}
+
+.project-description li {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.project-description li::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
 /* Contact Section */
 .contact {
     background-color: #fff;

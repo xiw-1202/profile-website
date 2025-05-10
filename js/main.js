@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sections[index].scrollIntoView({ behavior: 'smooth' });
             
             // Animate elements within the section
-            const elementsInSection = sections[index].querySelectorAll('.timeline-item, .skill-item, .education-item, .contact-item');
+            const elementsInSection = sections[index].querySelectorAll(elementSelectors);
             elementsInSection.forEach((el, i) => {
                 setTimeout(() => {
                     el.style.opacity = '1';
@@ -247,6 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollToSection(targetIndex);
             });
         });
+
+        // Extend element selectors for animations to include project items
+        const elementSelectors = '.timeline-item, .skill-item, .education-item, .contact-item, .project-item';
         
         // Add touch support for mobile
         let touchStartY = 0;
@@ -281,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFullPageScroll();
     
     // Optional: Add animation to individual elements within sections
-    const revealElements = document.querySelectorAll('.timeline-item, .skill-item, .education-item, .contact-item');
+    const revealElements = document.querySelectorAll(elementSelectors);
     
     revealElements.forEach(el => {
         el.style.opacity = '0';
