@@ -59,7 +59,7 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 80px 0 60px; /* Adjusted padding */
+    padding: 80px 0 90px; /* Increased bottom padding to account for footer */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -110,11 +110,13 @@ section:hover::-webkit-scrollbar-thumb {
     background-color: var(--gray-color);
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 .nav-dot.active {
     background-color: var(--primary-color);
     transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
 }
 
 .nav-dot:hover {
