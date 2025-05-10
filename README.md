@@ -1,77 +1,35 @@
-# Professional Profile Website
+# Xiaofei Wang - Professional Profile
 
-A personal professional profile website for Xiaofei Wang.
-
-## Description
-
-This is a responsive personal portfolio website designed to showcase professional experience, skills, education, and contact information. The website is built with HTML, CSS, and JavaScript without any external libraries or frameworks for the core functionality.
+This is my personal professional profile website showcasing my experience, skills, education, and projects.
 
 ## Features
 
-- Responsive design that works on mobile, tablet, and desktop
-- Clean and modern UI with smooth animations
-- Sections for:
-  - Home/Hero
-  - About Me
-  - Professional Experience
-  - Skills
-  - Education
-  - Contact
+- Interactive fullpage scrolling with smooth transitions
+- Responsive design for desktop and mobile devices
+- Sections for: Home, About Me, Experience, Skills, Projects, Education, and Contact
+- Clean, modern UI with subtle animations
 
-## Getting Started
+## Technologies Used
 
-### Prerequisites
+- HTML5
+- CSS3 with custom animations
+- Vanilla JavaScript
+- Responsive design
 
-- A modern web browser
-- Basic understanding of HTML, CSS, and JavaScript (for customization)
+## Development
 
-### Installation
+To run the project locally:
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/xiaofei-wang-profile.git
-   ```
+```bash
+node server.js
+```
 
-2. Navigate to the project directory:
-   ```
-   cd xiaofei-wang-profile
-   ```
-
-3. Open `index.html` in your browser to view the website locally
-
-## Customization
-
-### Changing Content
-
-- Edit the `index.html` file to update text content
-- Replace `img/profile-pic.jpg` with your own profile picture
-- Update links to your social media and contact information
-
-### Styling
-
-- Modify `css/style.css` to change colors, fonts, and layout
-- Root variables at the top of the CSS file make it easy to change the color scheme
-
-### Functionality
-
-- The contact form needs to be connected to a backend service to function
-- Edit `js/main.js` to modify animations and interactions
+Then visit http://localhost:3001 in your browser.
 
 ## Deployment
 
-This site can be deployed to any static hosting service:
-
-1. GitHub Pages
-2. Netlify
-3. Vercel
-4. Any standard web hosting service
+This site is deployed on Netlify at [xiaofei-wang.com](https://xiaofei-wang.com).
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
-
-## Acknowledgments
-
-- Font Awesome for icons
-- Google Fonts for typography
-- Inspiration from various portfolio designs
+MIT
