@@ -1,7 +1,47 @@
+// ============================================================
+// Enhanced Navigation System
+// ============================================================
+
 // Navigation Menu Toggle
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
 const navLinks = document.querySelectorAll('.nav-links li');
+const navLinksAnchors = document.querySelectorAll('.nav-links a');
+
+// Create nav indicator
+const navContainer = document.querySelector('.nav-links');
+const navIndicator = document.createElement('div');
+navIndicator.classList.add('nav-indicator');
+navContainer.appendChild(navIndicator);
+
+// Function to update the nav indicator position
+function updateNavIndicator(element) {
+    if (!element) return;
+    
+    // Get the position and dimensions of the link
+    const linkRect = element.getBoundingClientRect();
+    const navRect = navContainer.getBoundingClientRect();
+    
+    // Set the indicator position and width
+    navIndicator.style.left = `${linkRect.left - navRect.left}px`;
+    navIndicator.style.width = `${linkRect.width}px`;
+}
+
+// Initialize active link
+function setActiveNavLink(index) {
+    // Remove active class from all links
+    navLinksAnchors.forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to current link
+    if (navLinksAnchors[index]) {
+        navLinksAnchors[index].classList.add('active');
+        updateNavIndicator(navLinksAnchors[index]);
+    }
+}
+
+// Section navigation handled by links
 
 // Define global variables
 let sections;
@@ -10,6 +50,46 @@ let isScrolling = false;
 let sectionCount;
 let lastScrollPosition = 0;
 const elementSelectors = '.timeline-item, .skill-item, .education-item, .contact-item, .project-item';
+
+// When DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Make sure navigation links work properly
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetIndex = parseInt(this.getAttribute('data-index'));
+            if (!isNaN(targetIndex)) {
+                e.preventDefault();
+                scrollToSection(targetIndex);
+            }
+        });
+    });
+    
+    // Setup scroll progress
+    const progressBar = document.querySelector('.scroll-progress-bar');
+    
+    // Update progress bar based on section scroll
+    function updateScrollProgress() {
+        const currentSection = sections[currentSectionIndex];
+        if (!currentSection) return;
+        
+        const scrollPosition = currentSection.scrollTop;
+        const scrollHeight = currentSection.scrollHeight - currentSection.clientHeight;
+        const scrollPercentage = (scrollPosition / scrollHeight) * 100;
+        
+        progressBar.style.width = `${scrollPercentage}%`;
+    }
+    
+    // Update nav indicator for initial section
+    setTimeout(() => {
+        setActiveNavLink(0);
+    }, 500);
+    
+    // Add scroll event listener to update progress
+    document.addEventListener('scroll', function() {
+        updateScrollProgress();
+    });
+});
 
 burger.addEventListener('click', () => {
     // Toggle Nav
@@ -54,7 +134,13 @@ function updateHeaderState() {
         
         lastScrollPosition = currentSection.scrollTop;
         
-        // Footer is now always visible, no need to control visibility
+        // Update scroll progress
+        const progressBar = document.querySelector('.scroll-progress-bar');
+        if (progressBar) {
+            const scrollHeight = currentSection.scrollHeight - currentSection.clientHeight;
+            const scrollPercentage = (currentSection.scrollTop / scrollHeight) * 100;
+            progressBar.style.width = `${scrollPercentage}%`;
+        }
     }
 }
 
@@ -110,8 +196,12 @@ window.addEventListener('load', () => {
 function scrollToSection(index) {
     if (!sections || index < 0 || index >= sectionCount || isScrolling) return;
     
+    console.log("Scrolling to section:", index);
     isScrolling = true;
     currentSectionIndex = index;
+    
+    // Update navigation
+    setActiveNavLink(index);
     
     // Update navigation dots
     updateNavigationDots();
@@ -298,7 +388,7 @@ function createNavigationDots() {
     document.body.appendChild(nav);
 }
 
-// Close menu when clicking on a link - moved to after functions are defined
+// Close menu when clicking on a link
 function setupNavLinks() {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {

@@ -15,22 +15,57 @@
     </div>
     <header>
         <nav class="navbar">
-            <div class="logo">Xiaofei Wang</div>
-            <ul class="nav-links">
-                <li><a href="#home" class="section-link" data-index="0">Home</a></li>
-                <li><a href="#about" class="section-link" data-index="1">About Me</a></li>
-                <li><a href="#experience" class="section-link" data-index="2">Experience</a></li>
-                <li><a href="#skills" class="section-link" data-index="3">Skills</a></li>
-                <li><a href="#projects" class="section-link" data-index="4">Projects</a></li>
-                <li><a href="#education" class="section-link" data-index="5">Education</a></li>
-                <li><a href="#contact" class="section-link" data-index="6">Contact</a></li>
-            </ul>
+            <div class="logo">
+                <span class="logo-text">Xiaofei Wang</span>
+                <div class="logo-dot"></div>
+            </div>
+
+            <!-- Modern Nav Menu -->
+            <div class="nav-wrapper">
+                <ul class="nav-links">
+                    <li><a href="#home" class="section-link" data-index="0">
+                        <i class="nav-icon fas fa-home"></i>
+                        <span>Home</span>
+                    </a></li>
+                    <li><a href="#about" class="section-link" data-index="1">
+                        <i class="nav-icon fas fa-user"></i>
+                        <span>About</span>
+                    </a></li>
+                    <li><a href="#experience" class="section-link" data-index="2">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <span>Experience</span>
+                    </a></li>
+                    <li><a href="#skills" class="section-link" data-index="3">
+                        <i class="nav-icon fas fa-code"></i>
+                        <span>Skills</span>
+                    </a></li>
+                    <li><a href="#projects" class="section-link" data-index="4">
+                        <i class="nav-icon fas fa-project-diagram"></i>
+                        <span>Projects</span>
+                    </a></li>
+                    <li><a href="#education" class="section-link" data-index="5">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <span>Education</span>
+                    </a></li>
+                    <li><a href="#contact" class="section-link" data-index="6">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a></li>
+                </ul>
+            </div>
+
+
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
         </nav>
+
+        <!-- Progress Indicator -->
+        <div class="scroll-progress-container">
+            <div class="scroll-progress-bar"></div>
+        </div>
     </header>
 
     <main>
@@ -56,29 +91,67 @@
         </section>
 
         <!-- About Me Section -->
-        <section id="about" class="about">
+<section id="about" class="about">
             <div class="container">
                 <h2 class="section-title">About Me</h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>
-                            I'm a Software Development Engineer with expertise in building robust and efficient 
-                            full-stack applications. Currently pursuing a Master's degree in Computer Science at 
-                            Emory University with a GPA of 3.85/4.0, I combine academic excellence with professional 
-                            experience to create innovative technical solutions.
-                        </p>
-                        <p>
-                            My professional journey includes nearly three years as a Software Development Engineer 
-                            at USWOO Realty LLC, where I designed and developed CRM systems, implemented robust 
-                            API integrations, and built high-performance backend systems using Java Spring, GraphQL, 
-                            and MongoDB. I'm passionate about creating efficient systems that solve real-world problems.
-                        </p>
-                        <p>
-                            In addition to my professional experience, I'm actively involved in research and 
-                            development projects, including LLM-Assisted Compositional Image-Text Matching at 
-                            Emory University. My technical skills include Java, Python, JavaScript, Spring Boot, 
-                            React, and various database technologies. I'm fluent in English and a native Chinese speaker.
-                        </p>
+                        <div class="about-intro">
+                            <p class="intro-statement">
+                                I'm a Software Development Engineer who transforms complex challenges into elegant solutions. With expertise in full-stack development and a passion for performance optimization, I create systems that make a measurable impact.
+                            </p>
+                        </div>
+                        
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="highlight-info">
+                                    <h3>Education</h3>
+                                    <p>MS Computer Science at Emory University (GPA: 3.85/4.0)</p>
+                                    <p class="highlight-detail">BS Mathematics-Computer Science from UCSD</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="highlight-info">
+                                    <h3>Experience</h3>
+                                    <p>3+ years as Software Development Engineer</p>
+                                    <p class="highlight-detail">Increased agent productivity by 40% at USWOO Realty</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <div class="highlight-info">
+                                    <h3>Expertise</h3>
+                                    <p>Full-stack development across multiple technologies</p>
+                                    <p class="highlight-detail">Java, Python, JavaScript, Spring Boot, GraphQL</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-philosophy">
+                            <div class="philosophy-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <blockquote>
+                                To me, programming isn't just about writing code; it's about solving real problems. I approach each challenge by breaking it down methodically, designing scalable solutions, and optimizing for performance.
+                            </blockquote>
+                        </div>
+
+                        <div class="about-description">
+                            <p>
+                                Currently conducting research on LLM-Assisted Compositional Image-Text Matching at Emory, where I've achieved a 1.2% improvement in Top-1 Retrieval Precision compared to baseline methods. My experience includes building high-performance backend systems that reduced API response time by 35% and data fetching overhead by 60%.
+                            </p>
+                            <p>
+                                When I'm not coding, I enjoy exploring new technologies and contributing to open-source projects. Fluent in English and a native Chinese speaker.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -269,7 +342,7 @@
                                 <li>Implemented error handling and retry mechanisms for Canvas API calls to ensure robust data retrieval even during network instability.</li>
                                 <li>Implemented document processing capabilities using pdfplumber, python-docx, and BeautifulSoup4 to ensure comprehensive content extraction across different file types.</li>
                                 <li>Contributed to a Python-based backend system using SQLite for local storage and the Canvas API for data synchronization.</li>
-                                <li>Published open-source implementation at <a href="https://github.com/AdityaPrakash-26/Canvas-MCP" target="_blank">github.com/AdityaPrakash-26/Canvas-MCP</a></li>
+                                <li>Published open-source implementation at <a href="https://github.com/AdityaPrakash-26/Canvas-MCP" target="_blank" class="project-link"><i class="fab fa-github"></i> github.com/AdityaPrakash-26/Canvas-MCP</a></li>
                             </ul>
                         </div>
                     </div>
@@ -284,18 +357,70 @@
                 <div class="education-container">
                     <!-- Education Item 1 -->
                     <div class="education-item">
-                        <h3 class="degree">Master of Science, Computer Science</h3>
-                        <h4 class="institution">Emory University</h4>
-                        <p class="education-period">2024 - Expected 05/2026</p>
-                        <p class="education-details">GPA: 3.85/4.0</p>
+                        <div class="education-header">
+                            <h3 class="degree">Master of Science, Computer Science</h3>
+                            <h4 class="institution"><i class="fas fa-university"></i> Emory University</h4>
+                            <span class="education-period"><i class="far fa-calendar-alt"></i> 2024 - Expected 05/2026</span>
+                            <span class="education-details"><i class="fas fa-award"></i> GPA: 3.85/4.0</span>
+                        </div>
+                        <div class="education-body">
+                            <div class="course-list">
+                                <h5><i class="fas fa-book"></i> Coursework</h5>
+                                <table class="courses-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Course</th>
+                                            <th>Number</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>CS</td>
+                                            <td>526</td>
+                                            <td>Algorithms</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CS</td>
+                                            <td>534</td>
+                                            <td>Machine Learning</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CS</td>
+                                            <td>571</td>
+                                            <td>Natural Language Processing</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CS</td>
+                                            <td>540</td>
+                                            <td>Software Engineering</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CS</td>
+                                            <td>541</td>
+                                            <td>Information Visualization</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CS</td>
+                                            <td>570</td>
+                                            <td>Data Mining</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Education Item 2 -->
                     <div class="education-item">
-                        <h3 class="degree">Bachelor of Science, Mathematics-Computer Science</h3>
-                        <h4 class="institution">The University of California, San Diego</h4>
-                        <p class="education-period">Graduated 06/2021</p>
-                        <p class="education-details">Focused on mathematical foundations of computer science and programming.</p>
+                        <div class="education-header">
+                            <h3 class="degree">Bachelor of Science, Mathematics-Computer Science</h3>
+                            <h4 class="institution"><i class="fas fa-university"></i> The University of California, San Diego</h4>
+                            <span class="education-period"><i class="far fa-calendar-alt"></i> Graduated 06/2021</span>
+                        </div>
+                        <div class="education-body">
+                            <p>Focused on mathematical foundations of computer science and programming. Key areas included algorithms, data structures, mathematical modeling, and computational theory.</p>
+                        </div>
                     </div>
                 </div>
             </div>
